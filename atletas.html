@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Atletas - Strongman and Arm wrestling</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <meta
+      name="description"
+      content="Conheça os maiores atletas de Strongman and Arm wrestling."
+    />
+    <meta
+      name="keywords"
+      content="atletas,strongman,arm wrestling,forte,mundo"
+    />
+    <meta name="author" content="Robson" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div>
+          <div class="logo-1"></div>
+          <!--logo-1-->
+        </div>
+        <div>
+          <div class="logo-2"></div>
+          <!--logo-2-->
+        </div>
+        <nav class="menu-desktop">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="atletas.html" class="active">Atletas</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </nav>
+        <div class="clear"></div>
+        <!--clear-->
+      </div>
+      <!--container-->
+    </header>
+
+    <section class="atletas-hero">
+      <div class="container">
+        <h1>Nossos Atletas</h1>
+        <p>Conheça os maiores nomes do Strongman e Arm Wrestling</p>
+      </div>
+      <!--container-->
+    </section>
+    <!--atletas-hero-->
+
+    <section class="pesquisa-atletas">
+      <div class="container">
+        <div class="pesquisa-container">
+          <h2>Pesquise atletas pelo peso</h2>
+          <div class="pesquisa-form">
+            <input
+              type="number"
+              id="pesquisaPeso"
+              placeholder="Digite o peso em kg (ex: 120)"
+              min="50"
+              max="200"
+            />
+            <button onclick="pesquisarPorPeso()">Pesquisar</button>
+            <button onclick="mostrarTodos()">Mostrar Todos</button>
+          </div>
+          <div id="resultadoPesquisa" class="resultado-pesquisa"></div>
+        </div>
+        <!--pesquisa-container-->
+      </div>
+      <!--container-->
+    </section>
+    <!--pesquisa-atletas-->
+
+    <section class="lista-atletas" id="listaAtletas">
+      <div class="container">
+        <div class="atletas-grid">
+          <div class="atleta-card" data-peso="110">
+            <div
+              class="atleta-foto"
+              style="background-image: url('img/jhon.jpg')"
+            ></div>
+            <div class="atleta-info">
+              <h3>John Brzenk</h3>
+              <p class="categoria">Arm Wrestling</p>
+              <p class="peso">Peso: 110 kg</p>
+              <p class="descricao">
+                John Brzenk (nascido em 15 de julho de 1964, em McHenry,
+                Illinois, EUA) é um profissional da luta de braço. Ele compete
+                no Ultimate Armwrestling League e é o atual campeão de mão
+                direita na categoria dos pesos pesados. John é o número um das
+                Américas e está referenciado no Guinness Book como o maior de
+                todos os tempos.
+              </p>
+            </div>
+            <!--atleta-info-->
+          </div>
+          <!--atleta-card-->
+
+          <div class="atleta-card" data-peso="195">
+            <div
+              class="atleta-foto"
+              style="background-image: url('img/bra.jpg')"
+            ></div>
+            <div class="atleta-info">
+              <h3>Brian Shaw</h3>
+              <p class="categoria">Strongman</p>
+              <p class="peso">Peso: 195 kg</p>
+              <p class="descricao">
+                Brian Shaw é um competidor profissional de Strongman e vencedor
+                das competições de homem mais forte do mundo de 2011, 2013, 2015
+                e 2016. Em 2011, ele se tornou o primeiro homem a vencer os
+                concursos Arnold Strongman Classic e o Homem mais forte do mundo
+                no mesmo ano, um feito que ele replicou em 2015.
+              </p>
+            </div>
+            <!--atleta-info-->
+          </div>
+          <!--atleta-card-->
+
+          <div class="atleta-card" data-peso="125">
+            <div
+              class="atleta-foto"
+              style="background-image: url('img/devon.jpg')"
+            ></div>
+            <div class="atleta-info">
+              <h3>Devon Larratt</h3>
+              <p class="categoria">Arm Wrestling</p>
+              <p class="peso">Peso: 125 kg</p>
+              <p class="descricao">
+                Devon Larratt é um lutador de braço profissional canadense,
+                YouTuber e ex-membro das Forças Armadas canadenses. Devon
+                Larratt é amplamente considerado um dos melhores lutadores de
+                braço de todos os tempos, e é atualmente o lutador de braço # 1.
+              </p>
+            </div>
+            <!--atleta-info-->
+          </div>
+          <!--atleta-card-->
+
+          <div class="atleta-card" data-peso="180">
+            <div
+              class="atleta-foto"
+              style="background-image: url('img/edie.jpg')"
+            ></div>
+            <div class="atleta-info">
+              <h3>Eddie Hall</h3>
+              <p class="categoria">Strongman</p>
+              <p class="peso">Peso: 180 kg</p>
+              <p class="descricao">
+                Edward Stephen Hall é um Strongman britânico. Ele venceu a
+                competição World Strongest Man 2017. Hall também ganhou as
+                competições de Homem Mais Forte do Reino Unido e Homem Mais
+                Forte da Inglaterra várias vezes.
+              </p>
+            </div>
+            <!--atleta-info-->
+          </div>
+          <!--atleta-card-->
+
+          <div class="atleta-card" data-peso="175">
+            <div
+              class="atleta-foto"
+              style="background-image: url('img/thor.jpg')"
+            ></div>
+            <div class="atleta-info">
+              <h3>Hafþór Júlíus Björnsson</h3>
+              <p class="categoria">Strongman</p>
+              <p class="peso">Peso: 175 kg</p>
+              <p class="descricao">
+                Hafþór Júlíus Björnsson, conhecido como "The Mountain", é um
+                strongman islandês e ator. Ele foi o Homem Mais Forte do Mundo
+                em 2018 e detém o recorde mundial de levantamento terra com 501
+                kg.
+              </p>
+            </div>
+            <!--atleta-info-->
+          </div>
+          <!--atleta-card-->
+
+          <div class="atleta-card" data-peso="175">
+            <div
+              class="atleta-foto"
+              style="background-image: url('img/lev.jpg')"
+            ></div>
+            <div class="atleta-info">
+              <h3>Levan Saginashvili</h3>
+              <p class="categoria">Strongman</p>
+              <p class="peso">Peso: 175 kg</p>
+              <p class="descricao">
+                Levan Saginashvili é um Strongman georgiano, considerado um dos
+                atletas mais fortes do mundo. Ele é conhecido por sua força
+                excepcional e já conquistou múltiplos títulos em competições de
+                strongman, incluindo vitórias em competições internacionais.
+              </p>
+            </div>
+            <!--atleta-info-->
+          </div>
+          <!--atleta-card-->
+        </div>
+        <!--atletas-grid-->
+      </div>
+      <!--container-->
+    </section>
+    <!--lista-atletas-->
+
+    <footer>
+      <div class="container">
+        <img alt="imagem" src="img/queda.jpg" />
+        <img alt="imagem" src="img/strong.png" />
+      </div>
+      <!--container-->
+    </footer>
+
+    <div class="footer">
+      <p>Todos os direitos reservados</p>
+      <p>Robson Jobim - Cachoeira do Sul RS</p>
+    </div>
+    <!--footer-->
+
+    <script src="js/atletas.js"></script>
+  </body>
+</html>
