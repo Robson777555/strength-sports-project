@@ -1,0 +1,29 @@
+/* Estilos para favicon circular */
+.favicon-circular {
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Para ícones na aba do navegador */
+link[rel="icon"] {
+  border-radius: 50%;
+}
+
+/* Para Apple touch icons */
+link[rel="apple-touch-icon"] {
+  border-radius: 50%;
+}
+
+/* Estilos específicos para favicons ICO */
+.favicon-ico {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Garantir que os favicons apareçam circulares */
+img[src*="strong.ico"], 
+img[src*="favicon.ico"] {
+  border-radius: 50%;
+  overflow: hidden;
+}
