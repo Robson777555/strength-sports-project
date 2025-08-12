@@ -66,6 +66,98 @@ function alternarTipoPesquisa() {
     }
 }
 
+// Função para detectar se é dispositivo móvel
+function isMobileDevice() {
+    return window.innerWidth <= 768;
+}
+
+// Função para detectar se é tablet
+function isTabletDevice() {
+    return window.innerWidth > 768 && window.innerWidth <= 1024;
+}
+
+// Função para detectar se é dispositivo touch
+function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
+// Função para aplicar destaque visual no atleta encontrado
+function destacarAtleta(card) {
+    // Remover destaque anterior
+    const cardsAnteriores = document.querySelectorAll('.atleta-card.destaque');
+    cardsAnteriores.forEach(cardAnterior => {
+        cardAnterior.classList.remove('destaque');
+    });
+    
+    // Remover mensagem de feedback anterior
+    const feedbackAnterior = document.querySelector('.feedback-destaque');
+    if (feedbackAnterior) {
+        feedbackAnterior.remove();
+    }
+    
+    // Aplicar destaque no card atual
+    card.classList.add('destaque');
+    
+    // Criar mensagem de feedback
+    const nomeAtleta = card.querySelector('h3').textContent;
+    const feedback = document.createElement('div');
+    feedback.className = 'feedback-destaque';
+    feedback.setAttribute('role', 'alert');
+    feedback.setAttribute('aria-live', 'polite');
+    feedback.innerHTML = `
+        <div class="feedback-content">
+            <span class="feedback-icon" aria-hidden="true">🎯</span>
+            <span class="feedback-text">Atleta encontrado: <strong>${nomeAtleta}</strong></span>
+        </div>
+    `;
+    
+    // Inserir feedback antes da lista de atletas
+    const listaAtletas = document.getElementById('listaAtletas');
+    listaAtletas.parentNode.insertBefore(feedback, listaAtletas);
+    
+    // Ajustar timing do scroll baseado no dispositivo
+    let scrollDelay = 300;
+    let scrollBlock = 'center';
+    
+    if (isMobileDevice()) {
+        scrollDelay = 200;
+        scrollBlock = 'start';
+    } else if (isTabletDevice()) {
+        scrollDelay = 250;
+        scrollBlock = 'center';
+    }
+    
+    // Scroll suave para o atleta
+    setTimeout(() => {
+        card.scrollIntoView({ 
+            behavior: 'smooth',
+            block: scrollBlock
+        });
+        
+        // Adicionar foco para acessibilidade
+        if (!isTouchDevice()) {
+            card.setAttribute('tabindex', '-1');
+            card.focus();
+        }
+    }, scrollDelay);
+    
+    // Ajustar duração do destaque baseado no dispositivo
+    let destaqueDuration = 6000;
+    if (isMobileDevice()) {
+        destaqueDuration = 4000; // Menor duração em mobile para melhor performance
+    }
+    
+    // Remover destaque e feedback após o tempo definido
+    setTimeout(() => {
+        card.classList.remove('destaque');
+        if (feedback.parentNode) {
+            feedback.remove();
+        }
+        // Remover tabindex após o destaque
+        card.removeAttribute('tabindex');
+    }, destaqueDuration);
+}
+
 // Função para pesquisar atletas (por peso ou nome)
 function pesquisarAtletas() {
     const tipoPeso = document.querySelector('input[value="peso"]');
@@ -127,19 +219,19 @@ function pesquisarPorPeso() {
     if (atletasEncontrados.length > 0) {
         let resultadoHTML = `<h3>Atletas encontrados para o peso ${pesoDigitado}kg:</h3><ul>`;
         
-        atletasEncontrados.forEach(atleta => {
+        atletasEncontrados.forEach((atleta, index) => {
             resultadoHTML += `<li>${atleta.nome} - ${atleta.categoria} - ${atleta.peso}</li>`;
             // Mostrar o card do atleta encontrado
             atleta.card.style.display = 'block';
+            
+            // Destacar o primeiro atleta encontrado (mais próximo do peso)
+            if (index === 0) {
+                destacarAtleta(atleta.card);
+            }
         });
         
         resultadoHTML += '</ul>';
         resultadoDiv.innerHTML = resultadoHTML;
-        
-        // Scroll suave para os resultados
-        document.getElementById('listaAtletas').scrollIntoView({ 
-            behavior: 'smooth' 
-        });
         
     } else {
         resultadoDiv.innerHTML = `<p class="aviso">Nenhum atleta encontrado com peso próximo a ${pesoDigitado}kg. Tente um peso entre 110kg e 195kg.</p>`;
@@ -185,7 +277,7 @@ function pesquisarPorNome() {
     if (atletasEncontrados.length > 0) {
         let resultadoHTML = `<h3>Atletas encontrados para "${nomeDigitado}":</h3><ul>`;
         
-        atletasEncontrados.forEach(atleta => {
+        atletasEncontrados.forEach((atleta, index) => {
             resultadoHTML += `<li>${atleta.nome} - ${atleta.categoria} - Peso: ${atleta.peso} kg</li>`;
             
             // Encontrar e mostrar o card correspondente
@@ -193,17 +285,17 @@ function pesquisarPorNome() {
                 const nomeCard = card.querySelector('h3').textContent;
                 if (nomeCard === atleta.nome) {
                     card.style.display = 'block';
+                    
+                    // Destacar o primeiro atleta encontrado
+                    if (index === 0) {
+                        destacarAtleta(card);
+                    }
                 }
             });
         });
         
         resultadoHTML += '</ul>';
         resultadoDiv.innerHTML = resultadoHTML;
-        
-        // Scroll suave para os resultados
-        document.getElementById('listaAtletas').scrollIntoView({ 
-            behavior: 'smooth' 
-        });
         
     } else {
         resultadoDiv.innerHTML = `<p class="aviso">Nenhum atleta encontrado com o nome "${nomeDigitado}".</p>`;
@@ -221,6 +313,11 @@ function mostrarTodos() {
     pesquisaInputPeso.value = '';
     pesquisaInputNome.value = '';
     resultadoDiv.innerHTML = '';
+    
+    // Remover destaque de todos os cards
+    atletasCards.forEach(card => {
+        card.classList.remove('destaque');
+    });
     
     // Mostrar todos os cards
     atletasCards.forEach(card => {
@@ -249,6 +346,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const radioButtons = document.querySelectorAll('input[name="tipoPesquisa"]');
     radioButtons.forEach(radio => {
         radio.addEventListener('change', alternarTipoPesquisa);
+    });
+    
+    // Listener para redimensionamento da janela
+    window.addEventListener('resize', function() {
+        // Remover destaque se a tela for redimensionada
+        const cardsDestacados = document.querySelectorAll('.atleta-card.destaque');
+        const feedback = document.querySelector('.feedback-destaque');
+        
+        if (cardsDestacados.length > 0 || feedback) {
+            cardsDestacados.forEach(card => {
+                card.classList.remove('destaque');
+            });
+            if (feedback) {
+                feedback.remove();
+            }
+        }
     });
     
     // Inicializar mostrando todos os atletas

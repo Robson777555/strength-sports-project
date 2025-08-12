@@ -28,7 +28,7 @@ destacando alguns dos maiores atletas com breves descrições e imagens.
 
 •
 Página de Atletas (atletas.html): Lista detalhadamente os atletas, incluindo foto,
-categoria (Strongman ou Arm Wrestling), peso e uma breve descrição. Possui uma funcionalidade de pesquisa que permite filtrar atletas por peso.
+categoria (Strongman ou Arm Wrestling), peso e uma breve descrição. Possui uma funcionalidade de pesquisa que permite filtrar atletas por peso ou nome.
 
 •
 Página de Contato (contato.html): Fornece informações de contato como e-mail, telefone e localização, além de uma breve descrição sobre o especialista.
