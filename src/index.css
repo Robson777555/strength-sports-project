@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* Strongman & Arm Wrestling Design System */
+
+:root {
+  /* Background and surface colors */
+  --background: 220 20% 8%;
+  --foreground: 0 0% 98%;
+  --surface: 220 15% 12%;
+  --surface-muted: 220 12% 16%;
+
+  /* Card colors */
+  --card: 220 15% 12%;
+  --card-foreground: 0 0% 98%;
+
+  /* Popover colors */
+  --popover: 220 15% 12%;
+  --popover-foreground: 0 0% 98%;
+
+  /* Primary brand colors - Strong blue */
+  --primary: 210 85% 45%;
+  --primary-light: 210 85% 55%;
+  --primary-dark: 210 85% 35%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary brand colors - Power red */
+  --secondary: 0 75% 55%;
+  --secondary-light: 0 75% 65%;
+  --secondary-dark: 0 75% 45%;
+  --secondary-foreground: 0 0% 100%;
+
+  /* Accent colors */
+  --accent: 45 90% 55%;
+  --accent-foreground: 220 20% 8%;
+
+  /* Muted colors */
+  --muted: 220 12% 20%;
+  --muted-foreground: 220 10% 65%;
+
+  /* State colors */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* Border and input */
+  --border: 220 12% 25%;
+  --input: 220 12% 20%;
+  --ring: 210 85% 45%;
+
+  /* Radius */
+  --radius: 0.75rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Hero Button Styles */
+.btn-hero {
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+  color: hsl(var(--primary-foreground));
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.btn-hero:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: scale(1.05);
+}
+
+/* Athlete Card Styles */
+.athlete-card {
+  background-color: hsl(var(--card));
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 10px 30px -5px hsl(220 20% 5% / 0.5);
+}
+
+.athlete-card:hover {
+  transform: scale(1.05);
+  border-color: hsl(var(--primary) / 0.5);
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+}
+
+/* Navigation Styles */
+.nav-link {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: hsl(var(--foreground));
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 0.125rem;
+  bottom: 0;
+  left: 0;
+  background-color: hsl(var(--primary));
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Section Headers */
+.section-header {
+  font-size: 2.25rem;
+  font-weight: bold;
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  line-height: 1.2;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-header {
+    font-size: 3rem;
+  }
+}
+
+/* Filter Button Styles */
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.filter-btn-active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+}
+
+.filter-btn-inactive {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+}
+
+.filter-btn-inactive:hover {
+  background-color: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}
